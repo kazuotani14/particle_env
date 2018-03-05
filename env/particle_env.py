@@ -25,8 +25,8 @@ class ParticleEnv(gym.Env):
         self.max_states = np.array([self.max_pos, self.max_pos, self.max_vel, self.max_vel]) # x, y, vx, vz
         self.max_actions = np.array([self.max_force, self.max_force])
 
-        self.action_space = spaces.Box(low=-self.max_actions, high=self.max_actions)
-        self.observation_space = spaces.Box(low=-self.max_states, high=self.max_states)
+        self.action_space = spaces.Box(low=-self.max_actions, high=self.max_actions, dtype=np.float32)
+        self.observation_space = spaces.Box(low=-self.max_states, high=self.max_states, dtype=np.float32)
 
         self.viewer = None
 

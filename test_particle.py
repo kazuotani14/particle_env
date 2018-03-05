@@ -12,6 +12,8 @@ if __name__ == "__main__":
     env = gym.make('Particle-3-4-Sparse-v0')
     goal = np.array([3, 4]) # TODO find a way to build this into env? 
 
+    print('Running PD controller towards goal {}'.format(goal))
+
     obs = env.reset()
 
     done = False

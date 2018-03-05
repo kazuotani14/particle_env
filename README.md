@@ -31,3 +31,7 @@ register(
     max_episode_steps=200, 
     )
 ```
+
+### To-do
+
+* Get rid of "Exception ignored" when closing render
