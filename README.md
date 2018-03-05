@@ -1,4 +1,13 @@
-2D particle with double-integrator dynamics. Positions, velocities, forces are clamped. 
+2D particle with double-integrator dynamics, with the goal of pushing the particle towards a goal position. Positions, velocities, forces are clamped. 
+
+Follows the basic structure in the [gym documentation](https://github.com/openai/gym/tree/master/gym/envs).
+
+### Usage
+
+1. `cp test_particle.py ../`  
+2. `python test_particle.py`
+
+Note that the package is set up to be imported from the parent directory. Still need to figure out how to make it general.
 
 ### Adding an environment with a different goal position
 
@@ -22,5 +31,3 @@ register(
     max_episode_steps=200, 
     )
 ```
-
-

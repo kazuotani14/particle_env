@@ -1,7 +1,12 @@
+"""
+Note: this has to be called from outside directory. 
+TODO figure out Python package structure...
+"""
+
 import numpy as np
 from math import sqrt
 import gym
-import particle_env 
+import particle_env.env
 
 if __name__ == "__main__":
     env = gym.make('Particle-3-4-Sparse-v0')
