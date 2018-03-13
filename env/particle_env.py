@@ -76,7 +76,13 @@ class ParticleEnv(gym.Env):
 
         return self.state, reward, done, {}
 
-    def render(self, mode='human'):
+    def render(self, mode='human', close=False):
+        if close:
+            if self.viewer is not None:
+                self.viewer.close()
+                self.viewer = None
+            return
+
         screen_dim = 600
         screen_dim = 600
 
