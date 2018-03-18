@@ -14,7 +14,7 @@ class ParticleEnv(gym.Env):
     def __init__(self, goal, reward_structure):
         self.mass = 1.0
         self.max_force = 3.0
-        self.dt = 0.01 # seconds between state updates
+        self.dt = 0.05 # seconds between state updates
         self.tol = 1e-1
 
         self.goal = goal # np array of size 2, in xy coordinates
@@ -70,8 +70,11 @@ class ParticleEnv(gym.Env):
         if self.reward_structure == 'sparse':
             reward = 100.0 if done else -1.0
         elif self.reward_structure == 'dense':
-            reward = 100.0 if done else 1/(np.linalg.norm(pos - self.goal) + 1e-5) 
-
+            reward = 100.0 if done else 1 / (np.linalg.norm(pos - self.goal) + 1e-5)
+        elif self.reward_structure == 'reshaped':
+            # 7.5 is approximately the max distance from a
+            targetVelVec = self.goal - pos
+            reward = 100.0 if done else ((np.linalg.norm(pos - self.goal)) * -2 + 2 * np.dot(targetVelVec, vel) / (np.linalg.norm(targetVelVec) + 0.0001) / (np.linalg.norm(vel) + 0.0001) - 2)/10
         self.state = np.array([pos, vel]).flatten()
 
         return self.state, reward, done, {}
@@ -130,7 +133,7 @@ class ParticleEnv(gym.Env):
 class ParticleEnv_3_4(ParticleEnv):
     def __init__(self):
         goal = np.array([3, 4])
-        reward_structure = 'sparse'
+        reward_structure = 'reshaped'
         super().__init__(goal, reward_structure)
 
 
